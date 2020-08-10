@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ILicon} from '../../assets';
+import {colors, fonts} from '../../utils';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
@@ -20,15 +21,15 @@ export default Splash;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: '#E5E5E5',
+    backgroundColor: colors.white,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
     fontSize: 20,
-    color: '#112340',
-    fontFamily: 'Nunito-SemiBold',
+    color: colors.text.primary,
+    fontFamily: fonts.primary[600],
     marginTop: 20,
   },
 });

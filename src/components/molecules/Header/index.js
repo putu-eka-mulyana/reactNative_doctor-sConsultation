@@ -1,13 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {ICback} from '../../../assets';
-import {Gap} from '../../atoms';
-import {colors} from '../../../utils';
+import {colors, fonts} from '../../../utils';
+import {Button, Gap} from '../../atoms';
 
-const Header = ({title}) => {
+const Header = ({title, onPress}) => {
   return (
     <View style={styles.container}>
-      <ICback />
+      <Button type="icon-only" icon="back-dark" onPress={onPress} />
       <Text style={styles.text}>{title}</Text>
       <Gap width={24} />
     </View>
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: fonts.primary[600],
     color: colors.text.primary,
   },
 });
