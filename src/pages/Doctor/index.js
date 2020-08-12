@@ -4,7 +4,6 @@ import {
   HomeProfile,
   DoctorCategory,
   RatedDoctor,
-  NewItem,
   Gap,
   NewsItem,
 } from '../../components';
