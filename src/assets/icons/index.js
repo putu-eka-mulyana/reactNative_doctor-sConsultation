@@ -7,6 +7,7 @@ import ICHospital from './ic_hospital.svg';
 import ICHospitalActive from './ic_hospital_active.svg';
 import ICMessage from './ic_message.svg';
 import ICMessageActive from './ic_message_active.svg';
+import IconStart from './star_rate.svg';
 export {
   ICbackDark,
   ICBtnAddPhoto,
@@ -17,4 +18,5 @@ export {
   ICMessageActive,
   ICHospital,
   ICHospitalActive,
+  IconStart,
 };

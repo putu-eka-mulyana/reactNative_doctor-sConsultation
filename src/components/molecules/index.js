@@ -3,12 +3,12 @@ import BottomNavigator from './BottomNavigator';
 import HomeProfile from './HomeProfile';
 import DoctorCategory from './DoctorCategory';
 import RatedDoctor from './RatedDoctor';
-import NewItem from './NewItem';
+import NewsItem from './NewsItem';
 export {
   Header,
   BottomNavigator,
   HomeProfile,
   DoctorCategory,
   RatedDoctor,
-  NewItem,
+  NewsItem,
 };
