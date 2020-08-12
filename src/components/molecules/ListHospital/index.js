@@ -1,22 +1,22 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-import {Doctor2} from '../../../assets';
+import {Hospital1} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const ListDoctor = () => {
+const ListHospital = () => {
   return (
     <View style={styles.container}>
-      <Image source={Doctor2} style={styles.avatar} />
+      <Image source={Hospital1} style={styles.picture} />
       <View>
-        <Text style={styles.name}>Alexander Jannie</Text>
-        <Text style={styles.desc}>
-          Baik ibu, terima kasih banyak atas wakt...
-        </Text>
+        <Text style={styles.title}>Rumah Sakit</Text>
+        <Text style={styles.title}>Citra Bunga Merdeka</Text>
+        <Text style={styles.address}>Jln. Surya Sejahtera 20</Text>
       </View>
     </View>
   );
 };
-export default ListDoctor;
+
+export default ListHospital;
 
 const styles = StyleSheet.create({
   container: {
@@ -25,21 +25,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
-  avatar: {
-    width: 46,
-    height: 46,
-    borderRadius: 46 / 2,
-    marginRight: 12,
-    alignItems: 'center',
-  },
-  name: {
+  picture: {width: 80, height: 60, borderRadius: 11, marginRight: 16},
+  title: {
     fontSize: 16,
     fontFamily: fonts.primary.normal,
     color: colors.text.primary,
   },
-  desc: {
+  address: {
     fontSize: 12,
     fontFamily: fonts.primary[300],
+    marginTop: 6,
     color: colors.text.secondary,
   },
 });
