@@ -5,4 +5,14 @@ import Register from './Register';
 import Doctor from './Doctor';
 import Hospitals from './Hospitals';
 import Messages from './Messages';
-export {Splash, GetStarted, Login, Register, Doctor, Hospitals, Messages};
+import ChooseDoctor from './ChooseDoctor';
+export {
+  Splash,
+  GetStarted,
+  Login,
+  Register,
+  Doctor,
+  Hospitals,
+  Messages,
+  ChooseDoctor,
+};

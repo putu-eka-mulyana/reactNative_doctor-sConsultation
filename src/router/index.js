@@ -8,6 +8,7 @@ import {
   Doctor,
   Messages,
   Hospitals,
+  ChooseDoctor,
 } from '../pages';
 import UploadPhoto from '../pages/UploadPhoto';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -54,6 +55,11 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ChooseDoctor"
+        component={ChooseDoctor}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
