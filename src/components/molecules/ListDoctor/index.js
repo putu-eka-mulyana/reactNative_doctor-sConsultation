@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {Doctor2, ICChevronRight} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const ListDoctor = ({type}) => {
+const ListDoctor = ({type, onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={Doctor2} style={styles.avatar} />
       <View style={styles.wrepper}>
         <Text style={styles.name}>Alexander Jannie</Text>
@@ -14,7 +14,7 @@ const ListDoctor = ({type}) => {
         </Text>
       </View>
       {type === 'next' && <ICChevronRight />}
-    </View>
+    </TouchableOpacity>
   );
 };
 export default ListDoctor;

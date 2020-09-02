@@ -10,6 +10,8 @@ import ICMessage from './ic_message.svg';
 import ICMessageActive from './ic_message_active.svg';
 import IconStart from './star_rate.svg';
 import ICChevronRight from './chevron_right.svg';
+import IconSendDark from './icon_send_dark.svg';
+import IconSendLight from './icon_send_light.svg';
 export {
   ICbackDark,
   ICbackLight,
@@ -23,4 +25,6 @@ export {
   ICHospitalActive,
   IconStart,
   ICChevronRight,
+  IconSendDark,
+  IconSendLight,
 };
