@@ -2,15 +2,31 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from '../../utils';
 import {List} from '../../components/molecules';
+import {Doctor2} from '../../assets';
 
-const Messages = () => {
+const Messages = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.content}>
         <Text style={styles.title}>Messages</Text>
-        <List />
-        <List />
-        <List />
+        <List
+          name="eka"
+          desc="doctor kulit"
+          profile={Doctor2}
+          onPress={() => navigation.navigate('Chatting')}
+        />
+        <List
+          name="eka"
+          desc="doctor kulit"
+          profile={Doctor2}
+          onPress={() => navigation.navigate('Chatting')}
+        />
+        <List
+          name="eka"
+          desc="doctor kulit"
+          profile={Doctor2}
+          onPress={() => navigation.navigate('Chatting')}
+        />
       </View>
     </View>
   );
