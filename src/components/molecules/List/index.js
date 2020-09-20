@@ -1,23 +1,43 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {Doctor2, ICChevronRight} from '../../../assets';
+import {
+  Doctor2,
+  EditProfile,
+  GiveUsRate,
+  Help,
+  ICChevronRight,
+  Language,
+} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const ListDoctor = ({type, onPress}) => {
+const List = ({profile, name, desc, type, onPress, icon}) => {
+  const Icon = () => {
+    if (icon === 'editProfile') {
+      return <EditProfile />;
+    }
+    if (icon === 'languange') {
+      return <Language />;
+    }
+    if (icon === 'GiveUsRate') {
+      return <GiveUsRate />;
+    }
+    if (icon === 'help') {
+      return <Help />;
+    }
+    return <EditProfile />;
+  };
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image source={Doctor2} style={styles.avatar} />
+      {icon ? <Icon /> : <Image source={profile} style={styles.avatar} />}
       <View style={styles.wrepper}>
-        <Text style={styles.name}>Alexander Jannie</Text>
-        <Text style={styles.desc}>
-          Baik ibu, terima kasih banyak atas wakt...
-        </Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.desc}>{desc}</Text>
       </View>
       {type === 'next' && <ICChevronRight />}
     </TouchableOpacity>
   );
 };
-export default ListDoctor;
+export default List;
 
 const styles = StyleSheet.create({
   container: {
@@ -30,12 +50,12 @@ const styles = StyleSheet.create({
   },
   wrepper: {
     flex: 1,
+    marginLeft: 16,
   },
   avatar: {
     width: 46,
     height: 46,
     borderRadius: 46 / 2,
-    marginRight: 12,
     alignItems: 'center',
   },
   name: {

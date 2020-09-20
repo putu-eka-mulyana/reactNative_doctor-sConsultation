@@ -9,6 +9,7 @@ import {
 } from '../../components';
 import {fonts, colors} from '../../utils';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Doctor1} from '../../assets';
 const Doctor = ({navigation}) => {
   return (
     <View style={styles.page}>
@@ -16,7 +17,7 @@ const Doctor = ({navigation}) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Gap height={30} />
           <View style={styles.wrepperSection}>
-            <HomeProfile />
+            <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
             <Text style={styles.welcome}>
               Mau konsultasi dengan siapa hari ini?
             </Text>
@@ -43,9 +44,24 @@ const Doctor = ({navigation}) => {
           </View>
           <View style={styles.wrepperSection}>
             <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-            <RatedDoctor />
-            <RatedDoctor />
-            <RatedDoctor />
+            <RatedDoctor
+              onPress={() => navigation.navigate('DoctorProfile')}
+              name="eka"
+              desc="Doktor Anak"
+              avatar={Doctor1}
+            />
+            <RatedDoctor
+              onPress={() => navigation.navigate('DoctorProfile')}
+              name="eka"
+              desc="Doktor Anak"
+              avatar={Doctor1}
+            />
+            <RatedDoctor
+              onPress={() => navigation.navigate('DoctorProfile')}
+              name="eka"
+              desc="Doktor Anak"
+              avatar={Doctor1}
+            />
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
           <NewsItem />

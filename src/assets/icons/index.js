@@ -12,6 +12,10 @@ import IconStart from './star_rate.svg';
 import ICChevronRight from './chevron_right.svg';
 import IconSendDark from './icon_send_dark.svg';
 import IconSendLight from './icon_send_light.svg';
+import EditProfile from './EditProfile.svg';
+import Language from './language.svg';
+import GiveUsRate from './give_us_rate.svg';
+import Help from './help.svg';
 export {
   ICbackDark,
   ICbackLight,
@@ -27,4 +31,8 @@ export {
   ICChevronRight,
   IconSendDark,
   IconSendLight,
+  EditProfile,
+  GiveUsRate,
+  Language,
+  Help,
 };
