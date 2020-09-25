@@ -36,6 +36,10 @@ export const colors = {
       background: 'white',
       text: mainColors.dark1,
     },
+    disable: {
+      background: mainColors.grey3,
+      text: mainColors.grey4,
+    },
   },
   border: mainColors.gray2,
   cardLigth: mainColors.gray2,

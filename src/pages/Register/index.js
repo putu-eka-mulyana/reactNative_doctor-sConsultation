@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {Button, Gap, Header, Input, Loading} from '../../components';
 import {Fire} from '../../config';
-import {colors, useForm} from '../../utils';
+import {colors, storeData, useForm} from '../../utils';
 const Register = ({navigation}) => {
   const [form, setForm] = useForm({
     fullName: '',
@@ -19,7 +19,15 @@ const Register = ({navigation}) => {
       .then((success) => {
         setLoading(false);
         setForm('reset');
-        console.log('Register sucess: ', success);
+        const data = {
+          fullName: form.fullName,
+          profession: form.profession,
+          email: form.email,
+        };
+        Fire.database()
+          .ref('users/' + success.user.uid + '/')
+          .set(data);
+        storeData('user', data);
       })
       .catch((error) => {
         setLoading(false);
@@ -31,7 +39,7 @@ const Register = ({navigation}) => {
           color: colors.white,
         });
       });
-    // navigation.navigate('UploadPhoto')
+    navigation.navigate('UploadPhoto');
   };
   return (
     <>
