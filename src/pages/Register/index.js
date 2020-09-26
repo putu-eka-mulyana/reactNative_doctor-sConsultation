@@ -13,33 +13,40 @@ const Register = ({navigation}) => {
   });
   const [loading, setLoading] = useState(false);
   const onContiue = () => {
-    setLoading(true);
-    Fire.auth()
-      .createUserWithEmailAndPassword(form.email, form.password)
-      .then((success) => {
-        setLoading(false);
-        setForm('reset');
-        const data = {
-          fullName: form.fullName,
-          profession: form.profession,
-          email: form.email,
-        };
-        Fire.database()
-          .ref('users/' + success.user.uid + '/')
-          .set(data);
-        storeData('user', data);
-      })
-      .catch((error) => {
-        setLoading(false);
-        const errorMessage = error.message;
-        showMessage({
-          message: errorMessage,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
-      });
-    navigation.navigate('UploadPhoto');
+    const data = {
+      fullName: form.fullName,
+      profession: form.profession,
+      email: form.email,
+    };
+    navigation.navigate('UploadPhoto', data);
+    // setLoading(true);
+    // Fire.auth()
+    //   .createUserWithEmailAndPassword(form.email, form.password)
+    //   .then((success) => {
+    //     setLoading(false);
+    //     setForm('reset');
+    //     const data = {
+    //       fullName: form.fullName,
+    //       profession: form.profession,
+    //       email: form.email,
+    //       uid:success.user.id,
+    //     };
+    //     Fire.database()
+    //       .ref('users/' + success.user.uid + '/')
+    //       .set(data);
+    //     storeData('user', data);
+    //     navigation.navigate('UploadPhoto', data);
+    //   })
+    //   .catch((error) => {
+    //     setLoading(false);
+    //     const errorMessage = error.message;
+    //     showMessage({
+    //       message: errorMessage,
+    //       type: 'default',
+    //       backgroundColor: colors.error,
+    //       color: colors.white,
+    //     });
+    //   });
   };
   return (
     <>
