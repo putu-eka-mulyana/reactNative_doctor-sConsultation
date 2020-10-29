@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ICBtnRemovePhoto} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const Profile = ({name, desc, isRemove, photo, onPress}) => {
+const Profile = ({name, desc, isRemove, photo, onPress, defaultPhoto}) => {
   return (
     <View style={styles.container}>
       {!isRemove && (
@@ -15,7 +15,11 @@ const Profile = ({name, desc, isRemove, photo, onPress}) => {
       )}
       {isRemove && (
         <TouchableOpacity style={styles.borderProfile} onPress={onPress}>
-          <Image source={photo} style={styles.avater} />
+          <Image
+            source={photo}
+            style={styles.avater}
+            defaultSource={defaultPhoto}
+          />
           {isRemove && <ICBtnRemovePhoto style={styles.removePhoto} />}
         </TouchableOpacity>
       )}
