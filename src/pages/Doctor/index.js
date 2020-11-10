@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {
   HomeProfile,
@@ -7,10 +7,67 @@ import {
   Gap,
   NewsItem,
 } from '../../components';
-import {fonts, colors} from '../../utils';
+import {fonts, colors, showError} from '../../utils';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Doctor1} from '../../assets';
+import {Fire} from '../../config';
 const Doctor = ({navigation}) => {
+  const [news, setNews] = useState([]);
+  const [doctorCategory, setDoctorCategory] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  useEffect(() => {
+    getCategoryDoctor();
+    getDoctors();
+    getNews();
+  }, []);
+  const getDoctors = () => {
+    Fire.database()
+      .ref('doctors/')
+      .orderByChild('rate')
+      .limitToLast(3)
+      .once('value')
+      .then((res) => {
+        if (res.val()) {
+          const oldData = res.val();
+          const data = [];
+          Object.keys(oldData).map((key) => {
+            data.push({
+              id: key,
+              data: oldData[key],
+            });
+          });
+          setDoctors(data);
+        }
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
+  const getNews = () => {
+    Fire.database()
+      .ref('news')
+      .once('value')
+      .then((res) => {
+        if (res.val()) {
+          setNews(res.val());
+        }
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
+  const getCategoryDoctor = () => {
+    Fire.database()
+      .ref('category-doctor/')
+      .once('value')
+      .then((res) => {
+        if (res.val()) {
+          setDoctorCategory(res.val());
+        }
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -26,47 +83,44 @@ const Doctor = ({navigation}) => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.categorys}>
                 <Gap width={32} />
-                <DoctorCategory
-                  onPress={() => navigation.navigate('ChooseDoctor')}
-                />
-                <DoctorCategory
-                  onPress={() => navigation.navigate('ChooseDoctor')}
-                />
-                <DoctorCategory
-                  onPress={() => navigation.navigate('ChooseDoctor')}
-                />
-                <DoctorCategory
-                  onPress={() => navigation.navigate('ChooseDoctor')}
-                />
+                {doctorCategory.map((item) => {
+                  return (
+                    <DoctorCategory
+                      key={item.id}
+                      category={item.category}
+                      onPress={() => navigation.navigate('ChooseDoctor')}
+                    />
+                  );
+                })}
                 <Gap width={22} />
               </View>
             </ScrollView>
           </View>
           <View style={styles.wrepperSection}>
             <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-            <RatedDoctor
-              onPress={() => navigation.navigate('DoctorProfile')}
-              name="eka"
-              desc="Doktor Anak"
-              avatar={Doctor1}
-            />
-            <RatedDoctor
-              onPress={() => navigation.navigate('DoctorProfile')}
-              name="eka"
-              desc="Doktor Anak"
-              avatar={Doctor1}
-            />
-            <RatedDoctor
-              onPress={() => navigation.navigate('DoctorProfile')}
-              name="eka"
-              desc="Doktor Anak"
-              avatar={Doctor1}
-            />
+            {doctors.map((doctor) => {
+              return (
+                <RatedDoctor
+                  onPress={() => navigation.navigate('DoctorProfile')}
+                  name={doctor.data.fullName}
+                  desc={doctor.data.profession}
+                  avatar={{uri: doctor.data.photo}}
+                  rate={doctor.data.rate}
+                />
+              );
+            })}
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
-          <NewsItem />
-          <NewsItem />
-          <NewsItem />
+          {news.map((item) => {
+            return (
+              <NewsItem
+                key={item.id}
+                title={item.title}
+                date={item.date}
+                image={{uri: item.image}}
+              />
+            );
+          })}
           <Gap height={34} />
         </ScrollView>
       </View>

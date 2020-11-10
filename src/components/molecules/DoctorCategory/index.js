@@ -3,12 +3,12 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {IconDokterUmum} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const DoctorCategory = ({onPress}) => {
+const DoctorCategory = ({category, onPress}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <IconDokterUmum style={styles.illustration} />
       <Text style={styles.label}>Saya butuh</Text>
-      <Text style={styles.category}>dokter umum</Text>
+      <Text style={styles.category}>{category}</Text>
     </TouchableOpacity>
   );
 };
