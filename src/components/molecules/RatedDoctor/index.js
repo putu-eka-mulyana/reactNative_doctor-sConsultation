@@ -6,7 +6,7 @@ import {colors, fonts} from '../../../utils';
 const RatedDoctor = ({name, desc, avatar, onPress, rate}) => {
   let rates = [];
   for (let i = 0; i < rate; i++) {
-    rates.push(<IconStart />);
+    rates.push(<IconStart key={i} />);
   }
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
