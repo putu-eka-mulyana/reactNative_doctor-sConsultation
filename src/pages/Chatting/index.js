@@ -1,23 +1,111 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Header, InputChat, ChatItem} from '../../components';
-import {fonts, colors} from '../../utils';
+import {
+  fonts,
+  colors,
+  getData,
+  showError,
+  getChatTime,
+  setChatDate,
+} from '../../utils';
+import {Fire} from '../../config';
 
-const Chatting = ({navigation}) => {
+const Chatting = ({navigation, route}) => {
+  const dataDocter = route.params;
+  const [ChatContent, setChatContent] = useState('');
+  const [user, setUser] = useState({});
+  const [chatData, setChatData] = useState([]);
+  useEffect(() => {
+    getDataUserFromLocal();
+    const chatID = `${user.uid}_${dataDocter.data.uid}`;
+    const urlFirebase = `chatting/${chatID}/allChat/`;
+    Fire.database()
+      .ref(urlFirebase)
+      .on('value', (snapshot) => {
+        if (snapshot.val()) {
+          const dataSnapshot = snapshot.val();
+          const allDataChat = [];
+          Object.keys(dataSnapshot).map((key) => {
+            const dataChat = dataSnapshot[key];
+            const newDataChat = [];
+            Object.keys(dataChat).map((itemChat) => {
+              newDataChat.push({
+                id: itemChat,
+                data: dataChat[itemChat],
+              });
+            });
+            allDataChat.push({
+              id: key,
+              data: newDataChat,
+            });
+          });
+          setChatData(allDataChat);
+        }
+      });
+  }, [dataDocter.data.id, user.uid]);
+  const getDataUserFromLocal = () => {
+    getData('user').then((res) => {
+      setUser(res);
+    });
+  };
+  const chatSend = () => {
+    const today = new Date();
+    const data = {
+      sendBy: user.uid,
+      chatDate: today.getTime(),
+      chatTime: getChatTime(today),
+      chatContent: ChatContent,
+    };
+    const chatID = `${user.uid}_${dataDocter.data.uid}`;
+    const urlFirebase = `chatting/${chatID}/allChat/${setChatDate(today)}`;
+    Fire.database()
+      .ref(urlFirebase)
+      .push(data)
+      .then(() => {
+        setChatContent('');
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
   return (
     <View style={styles.page}>
       <Header
         type="dark-profile"
-        title="Pilih Dokter Anak"
+        title={dataDocter.data.fullName}
+        photo={{uri: dataDocter.data.photo}}
+        desc={dataDocter.data.category}
         onPress={() => navigation.goBack()}
       />
-      <Text style={styles.chatDate}>Senin, 21 Maret, 2020</Text>
       <View style={styles.content}>
-        <ChatItem isme />
-        <ChatItem />
-        <ChatItem isme />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {chatData.map((chat) => {
+            return (
+              <View key={chat.id}>
+                <Text style={styles.chatDate}>{chat.id}</Text>
+                {chat.data.map((itemChat) => {
+                  const isMe = itemChat.data.sendBy === user.uid;
+                  return (
+                    <ChatItem
+                      key={itemChat.id}
+                      isme={isMe}
+                      text={itemChat.data.chatContent}
+                      date={itemChat.data.chatTime}
+                      photo={isMe ? null : {uri: dataDocter.data.photo}}
+                    />
+                  );
+                })}
+              </View>
+            );
+          })}
+        </ScrollView>
       </View>
-      <InputChat />
+      <InputChat
+        value={ChatContent}
+        onChangeText={(value) => setChatContent(value)}
+        onButtonPress={chatSend}
+      />
     </View>
   );
 };
