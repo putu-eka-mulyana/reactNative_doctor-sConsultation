@@ -4,6 +4,7 @@ export const storeData = async (key, value) => {
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     // saving error
+    console.log(e);
   }
 };
 

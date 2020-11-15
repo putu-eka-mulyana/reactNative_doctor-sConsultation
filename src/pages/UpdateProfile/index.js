@@ -94,7 +94,6 @@ const UpdateProfile = ({navigation}) => {
             color: colors.white,
           });
         } else {
-          console.log(response);
           setPhotoForDB(`data:${response.type};base64, ${response.data}`);
           setPhoto({uri: response.uri});
         }

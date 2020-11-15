@@ -27,9 +27,11 @@ const Login = ({navigation}) => {
           .then((resDB) => {
             if (resDB.val()) {
               storeData('user', resDB.val());
+              navigation.replace('MainApp');
+            } else {
+              showError('pasian belum terdaftar');
             }
           });
-        navigation.replace('MainApp');
       })
       .catch((err) => {
         showError(err.message);
@@ -41,7 +43,7 @@ const Login = ({navigation}) => {
   };
   return (
     <View style={styles.page}>
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Gap height={40} />
         <ILicon />
         <Text style={styles.title}>Masuk dan mulai berkonsultasi</Text>

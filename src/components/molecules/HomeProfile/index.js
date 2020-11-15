@@ -19,10 +19,14 @@ const HomeProfile = ({onPress}) => {
   }, []);
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image source={User} style={styles.avatar} />
+      <Image
+        source={profile.photo}
+        style={styles.avatar}
+        defaultSource={ILUserPhotoNull}
+      />
       <View>
-        <Text style={styles.name}>Shayna Melinda</Text>
-        <Text style={styles.profession}>Product Designer</Text>
+        <Text style={styles.name}>{profile.fullName}</Text>
+        <Text style={styles.profession}>{profile.profession}</Text>
       </View>
     </TouchableOpacity>
   );

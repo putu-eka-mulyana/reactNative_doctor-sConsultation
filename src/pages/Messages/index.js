@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {colors, fonts, getData} from '../../utils';
+import {colors, fonts, getData, storeData} from '../../utils';
 import {List} from '../../components/molecules';
 import {Doctor2} from '../../assets';
 import {Fire} from '../../config';
