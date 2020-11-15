@@ -59,11 +59,25 @@ const Chatting = ({navigation, route}) => {
     };
     const chatID = `${user.uid}_${dataDocter.data.uid}`;
     const urlFirebase = `chatting/${chatID}/allChat/${setChatDate(today)}`;
+    const urlMessageUser = `messages/${user.uid}/${chatID}`;
+    const urlMessageDoctor = `messages/${dataDocter.data.uid}/${chatID}`;
+    const dataHistoryChatForUser = {
+      lastContentChat: ChatContent,
+      lastChatDate: today.getTime(),
+      uidPartner: dataDocter.data.uid,
+    };
+    const dataHistoryChatForDoctor = {
+      lastContentChat: ChatContent,
+      lastChatDate: today.getTime(),
+      uidPartner: user.uid,
+    };
     Fire.database()
       .ref(urlFirebase)
       .push(data)
       .then(() => {
         setChatContent('');
+        Fire.database().ref(urlMessageUser).set(dataHistoryChatForUser);
+        Fire.database().ref(urlMessageDoctor).set(dataHistoryChatForDoctor);
       })
       .catch((err) => {
         showError(err.message);
